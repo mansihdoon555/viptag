@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p>
+      <input type="button" value="save" onclick="datasave()" />
+    </p>
+  </body>
+  <script type="text/javascript">
+     function datasave()
+     {
+      const data = JSON.stringify({
+  email: 'manishdoon555@gmail.com',
+  desc: 'this is test ticket please ignore it'
+})
+
+const xhr = new XMLHttpRequest()
+xhr.withCredentials = true
+
+xhr.addEventListener('readystatechange', function() {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText)
+  }
+})
+
+xhr.open('POST', '/users/users')
+xhr.setRequestHeader('content-type', 'application/json')
+
+  xhr.setRequestHeader('Authorization', 'Basic ' + btoa("john" + ":" + "secret"))
+
+xhr.send(data)
+     }
+  </script>
+</html>
